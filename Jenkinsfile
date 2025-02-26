@@ -9,7 +9,7 @@ pipeline {
         }
         stage('package') {
             steps {
-                sh 'mvn package'
+                sh 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH" && mvn package'
             }
         }
         stage('post build') {
