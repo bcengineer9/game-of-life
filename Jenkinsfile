@@ -38,4 +38,4 @@ pipeline {
                 from: 'devops@qt.com'
         }
     }
-}
+
