@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'MAVEN_JDK8' }
+    agent { label 'india' }
     triggers { pollSCM ('H/30 * * * *') }
     parameters {
         choice(name: 'MAVEN_GOAL', choices: ['package', 'install', 'clean'], description: 'Maven Goal')
@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('vcs') {
             steps {
-                git url: 'https://github.com/khajadevopsmarch23/game-of-life.git',
+                git url: 'https://github.com/bcengineer9/game-of-life.git',
                     branch: 'declarative'
             }
         }
