@@ -14,7 +14,7 @@ pipeline {
                 jdk 'JAVA-8'  // Ensure this JDK is configured in Jenkins
             }
             steps {
-                sh 'mvn pac'  // Added clean for a fresh build
+                sh 'mvn package'  // Added clean for a fresh build
             }
         }
         
