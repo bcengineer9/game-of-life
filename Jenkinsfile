@@ -11,10 +11,10 @@ pipeline {
         
         stage('package') {
             tools {
-                jdk 'JAVA-'  // Ensure this JDK is configured in Jenkins
+                jdk 'JAVA-8'  // Ensure this JDK is configured in Jenkins
             }
             steps {
-                sh 'mvn clean package'  // Added clean for a fresh build
+                sh 'mvn pac'  // Added clean for a fresh build
             }
         }
         
