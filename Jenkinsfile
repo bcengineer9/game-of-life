@@ -1,7 +1,6 @@
-pipeline {
-    agent { label 'india' }
-    }
+pipeline  
     stages {
+        agent { label 'india' }
         stage('vcs') {
             steps {
                 git url: 'https://github.com/bcengineer9/game-of-life.git',
