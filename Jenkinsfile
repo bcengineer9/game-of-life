@@ -1,15 +1,22 @@
 pipeline {
-    agent { label 'india' }
+    agent { label 'MAVEN_JDK8' }
+    triggers { pollSCM ('H/30 * * * *') }
+    parameters {
+        choice(name: 'MAVEN_GOAL', choices: ['package', 'install', 'clean'], description: 'Maven Goal')
+    }
     stages {
         stage('vcs') {
             steps {
-                git url: 'https://github.com/bcengineer9/game-of-life.git',
+                git url: 'https://github.com/khajadevopsmarch23/game-of-life.git',
                     branch: 'declarative'
             }
         }
         stage('package') {
+            tools {
+                jdk 'JDK_8_UBUNTU'
+            }
             steps {
-                sh 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH" && mvn package'
+                sh "mvn ${params.MAVEN_GOAL}"
             }
         }
         stage('post build') {
