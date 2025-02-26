@@ -1,9 +1,9 @@
 pipeline {
-    agent { label 'MAVEN_JDK8' }
+    agent { label 'india' }
     stages {
         stage('vcs') {
             steps {
-                git url: 'https://github.com/khajadevopsmarch23/game-of-life.git',
+                git url: 'https://github.com/bcengineer9/game-of-life.git',
                     branch: 'declarative'
             }
         }
