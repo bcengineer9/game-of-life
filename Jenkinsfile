@@ -1,14 +1,11 @@
 pipeline {
     agent { label 'india' }
-    triggers { pollSCM ('H/30 * * * *') }
-    parameters {
-        choice(name: 'MAVEN_GOAL', choices: ['package', 'install', 'clean'], description: 'Maven Goal')
     }
     stages {
         stage('vcs') {
             steps {
                 git url: 'https://github.com/bcengineer9/game-of-life.git',
-                    branch: 'declarative'
+                    branch: 'notifications'
             }
         }
         stage('package') {
@@ -25,6 +22,20 @@ pipeline {
                                  onlyIfSuccessful: true
                 junit testResults: '**/surefire-reports/TEST-*.xml'
             }
+        }
+    }
+    post {
+        success {
+            mail subject: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is success",
+                body: "Use this URL ${BUILD_URL} for more info",
+                to: 'team-all-qt@qt.com',
+                from: 'devops@qt.com'
+        }
+        failure {
+            mail subject: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is failed",
+                body: "Use this URL ${BUILD_URL} for more info",
+                to: "${GIT_AUTHOR_EMAIL}",
+                from: 'devops@qt.com'
         }
     }
 }
